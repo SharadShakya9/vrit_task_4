@@ -6,6 +6,15 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 const LoginPage = async () => {
+  const session = await getSession()
+
+  if (session.isLoggedIn) {
+    return (
+      <div className="bg-lemons w-full min-h-screen p-20 flex justify-center">
+        <p className="text-3xl text-green-300">You are logged in!!!!</p>
+      </div>
+    )
+  }
 
   return (
     <main className="w-screen min-h-screen flex justify-center items-center bg-lemons">

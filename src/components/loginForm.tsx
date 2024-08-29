@@ -1,9 +1,14 @@
+"use client"
+
 import React from "react";
 import { login } from "@/actions";
+import { useFormState } from "react-dom";
 
 const LoginForm = () => {
+    const [state, formAction] = useFormState<any, FormData>(login, undefined)
+
   return (
-    <form action={login} className="flex w-full flex-col items-center gap-3">
+    <form action={formAction} className="flex w-full flex-col items-center gap-3">
       <div className="flex flex-col gap-2">
         <label htmlFor="username">Username</label>
         <input
@@ -31,6 +36,8 @@ const LoginForm = () => {
       <button className="px-5 py-3 bg-blue-500 rounded-lg">
         <p className="text-white font-semibold text-xl">Sign In</p>
       </button>
+
+      {state?.error && <p className="text-red-600 text-2xl italic">{state.error}</p>}
     </form>
   );
 };
